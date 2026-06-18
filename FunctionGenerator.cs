@@ -6,13 +6,13 @@ using UnityEngine;
 public class FunctionGenerator : MonoBehaviour
 {
     public GameObject point;
-    public float delta_detail = 1f;
+    public float detail = 1f;
     public int num_points = 100;
     public Vector2[] inputs, outputs;
 
     private void DefineDomain()
     {
-        int steps = Convert.ToInt32(num_points / delta_detail);
+        int steps = Convert.ToInt32(num_points * detail);
         int total_points = steps * steps;
         
         inputs = new Vector2[total_points];
@@ -22,10 +22,7 @@ public class FunctionGenerator : MonoBehaviour
         {
             for (int j = 0; j < steps; j++)
             {
-                float x_pos = i * delta_detail;
-                float y_pos = j * delta_detail;
-                inputs[k] = new Vector2(x_pos, y_pos);
-                k++;
+                inputs[k++] = new Vector2(i, j) * (1 / detail);
             }
         }
     }
