@@ -10,7 +10,7 @@ public class FunctionGenerator : MonoBehaviour
     public int num_points = 100;
     public Vector2[] inputs, outputs;
 
-    public void Start()
+    private void DefineDomain()
     {
         int steps = Convert.ToInt32(num_points / delta_detail);
         int total_points = steps * steps;
@@ -28,7 +28,10 @@ public class FunctionGenerator : MonoBehaviour
                 k++;
             }
         }
+    }
 
+    private void DefineRange()
+    {
         outputs = new Vector2[inputs.Length];
 
         for (int i = 0; i < outputs.Length; i++)
@@ -40,6 +43,11 @@ public class FunctionGenerator : MonoBehaviour
             Renderer new_point_renderer = new_point.GetComponent<Renderer>();
             new_point_renderer.material.color = Color.HSVToRGB(outputs[i].y % 100 / 100, 1, 1);
         }
-
+        
+    }
+    public void Start()
+    {
+        DefineDomain();
+        DefineRange();
     }
 }
